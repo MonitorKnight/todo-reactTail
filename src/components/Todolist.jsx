@@ -14,36 +14,33 @@ function Todolist() {
       ...todoValue,
       { id: uuidv4(), task: todo, isEditing: false },
     ]);
-    console.log(`todovalue ${todoValue}`);
+    console.log(todoValue);
   };
 
   const deleteTodo = (id) => {
     setTodoValue(todoValue.filter((todo) => todo.id !== id));
   };
 
-  const editTodo = (id) => {
+  const editTodo = (id) =>
     setTodoValue(
       todoValue.map((todo) =>
-        todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
+        todo.id == id ? { ...todo, isEditing: !todo.isEditing } : todo
       )
     );
-  };
-
-  const editTask = (task, id) => {
+  const editTask = (task, id) =>
     setTodoValue(
       todoValue.map((todo) => {
-        todo.id === id ? { ...todo, task, isEditing: !todo.isEditing } : todo;
+        todo.id == id ? { ...todo, task, isEditing: !todo.isEditing } : todo;
       })
     );
-  };
 
   return (
     <div className="container bg-gray-700 mt-20 p-8 rounded-sm">
       <Form createTodo={createTodo} />
       {/* melooping isi semua todoValue kemudian memasukan tiap tiap nya kedalam Todo.jsx dan index sebagai key */}
       {todoValue.map((todo, index) => {
-        todo.isEditing ? (
-          <Edit editTodo={editTask} task={todo} key={index} />
+        return todo.isEditing ? (
+          <Edit editTask={editTask} task={todo} key={index} />
         ) : (
           <Todo
             task={todo}

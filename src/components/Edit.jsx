@@ -23,7 +23,7 @@ function Edit({ editTask, task }) {
           value={value}
         />
         <button className="bg-violet-800 p-4 text-white cursor-pointer ml-2 rounded">
-          Tambah
+          Edit
         </button>
       </form>
     </div>
