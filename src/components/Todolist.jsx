@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "./Form";
 import Todo from "./Todo";
 import { v4 as uuidv4 } from "uuid";
@@ -8,6 +8,9 @@ uuidv4();
 
 function Todolist() {
   const [todoValue, setTodoValue] = useState([]);
+  useEffect(() => {
+    console.log(todoValue);
+  }, []);
 
   const createTodo = (todo) => {
     setTodoValue([
@@ -21,18 +24,20 @@ function Todolist() {
     setTodoValue(todoValue.filter((todo) => todo.id !== id));
   };
 
-  const editTodo = (id) =>
+  const editTodo = (id) => {
     setTodoValue(
       todoValue.map((todo) =>
         todo.id == id ? { ...todo, isEditing: !todo.isEditing } : todo
       )
     );
-  const editTask = (task, id) =>
+  };
+  const editTask = (task, id) => {
     setTodoValue(
-      todoValue.map((todo) => {
-        todo.id == id ? { ...todo, task, isEditing: !todo.isEditing } : todo;
-      })
+      todoValue.map((todo) =>
+        todo.id == id ? { ...todo, task, isEditing: !todo.isEditing } : todo
+      )
     );
+  };
 
   return (
     <div className="container bg-gray-700 mt-20 p-8 rounded-sm">
